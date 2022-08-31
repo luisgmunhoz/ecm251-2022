@@ -8,7 +8,7 @@ base = ttk.Window(
     position = (100, 100),
     minsize = (600, 300),
     maxsize = (1800, 900),
-    alpha = 0.75
+    alpha = 1
 )
 base.iconphoto(False, PhotoImage(file = "calculator.png"))
 
@@ -22,5 +22,13 @@ ttk.Button(
     command = acao_botao
 ).pack(side = LEFT, padx = 10, pady = 5)
 
+# Criando um segundo botao
+bot2 = ttk.Button(
+    base, 
+    text= "Segundo Botão",
+    bootstyle = (DANGER, OUTLINE),
+    command = acao_botao
+)
+bot2.pack(side = LEFT, padx = 10, pady=5)
 # Ponto de entrada da interface
 base.mainloop()
