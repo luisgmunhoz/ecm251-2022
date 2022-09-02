@@ -26,20 +26,27 @@ class MinhaUI():
             command=acao
         )
 
-    def _criar_texto(self, guardar):
-        return ttk.Entry(
-            self.base,
-            textvariable=guardar
-        )
+    def _criar_texto(self, guardar,senha):
+        if(senha == True):
+            return ttk.Entry(
+                self.base,
+                textvariable=guardar,
+                show = "*"
+            )
+        else:
+            return ttk.Entry(
+                self.base,
+                textvariable=guardar,
+            )
 
     def __init__(self) -> None:
         self.base = self._construir_base()
         self.valor_digitado = ""
-        self.login = self._criar_texto(guardar=self.valor_digitado)
+        self.login = self._criar_texto(guardar=self.valor_digitado, senha = False)
         self.login.grid(row=2, column=1, padx=5, pady=5)
-        self.senha = self._criar_texto(guardar=self.valor_digitado)
+        self.senha = self._criar_texto(guardar=self.valor_digitado, senha = True)
         self.senha.grid(row=3, column=1, padx=5, pady=5)
-        self.bot = self._criar_botao(texto="AÇÃO", acao=self.guardar_logar)
+        self.bot = self._criar_botao(texto="Logar", acao=self.guardar_logar)
         self.bot.grid(row=3, column=2, padx=5, pady=5)
     def run(self):
         self.base.mainloop()
