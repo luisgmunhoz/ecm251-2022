@@ -1,5 +1,6 @@
 from cgitb import text
 from login import logar
+from usuario import Usuario
 from unittest.mock import DEFAULT
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
@@ -47,13 +48,19 @@ class MinhaUI():
         self.senha = self._criar_texto(guardar=self.valor_digitado, senha = True)
         self.senha.grid(row=3, column=1, padx=5, pady=5)
         self.bot = self._criar_botao(texto="Logar", acao=self.guardar_logar)
-        self.bot.grid(row=3, column=2, padx=5, pady=5)
+        self.bot.grid(row=4, column=1, padx=5, pady=5)
+        self.bot = self._criar_botao(texto="Registrar", acao=self.guardar_registrar)
+        self.bot.grid(row=5, column=1, padx=5, pady=5)
     def run(self):
         self.base.mainloop()
 
     def guardar_logar(self):
         log = [self.login.get(), self.senha.get()]
         logar(log[0],log[1])
+
+    def guardar_registrar(self):
+        log = [self.login.get(), self.senha.get()]
+        user = Usuario(log[0], log[1])
 
 
 if __name__ == "__main__":
