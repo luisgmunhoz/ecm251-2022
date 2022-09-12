@@ -21,10 +21,12 @@ class MinhaUI():
         cart_button.pack(side = RIGHT)
 
     def tela_login(self, login, senha):
+        texto = ttk.Label(text="Projeto Loja Online - Login", background = "#373E40", foreground = "#488286", font = ("Helvetica", 24))
+        texto.pack()
         style_login = ttk.Style()
         # Create style used by default for all Frames
         style_login.configure('TFrame', background='green')
-
+        
         # Create style for the first frame
         style_login.configure('Frame1.TFrame', background='#77878B')
         # Use created style in this frame
