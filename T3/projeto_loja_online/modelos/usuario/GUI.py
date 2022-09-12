@@ -21,7 +21,7 @@ class MinhaUI():
         cart_button.pack(side = RIGHT)
 
     def tela_login(self, login, senha):
-        texto = ttk.Label(text="Projeto Loja Online - Login", background = "#373E40", foreground = "#488286", font = ("Helvetica", 24))
+        texto = ttk.Label(text="Projeto Loja Online - Login", background = "#373E40", foreground = "#488286", font = ("Ubuntu Mono", 24))
         texto.pack()
         style_login = ttk.Style()
         # Create style used by default for all Frames
@@ -52,20 +52,20 @@ class MinhaUI():
 
 
        
-        texto1 = ttk.Label(text="Usuário",master = frame1, background = "#77878B", foreground = "#373E40", font = ("Helvetica", 24), anchor = W)
+        texto1 = ttk.Label(text="Usuário",master = frame1, background = "#77878B", foreground = "#373E40", font = ("Ubuntu Mono", 24), anchor = W)
         texto1.grid(row=1,pady=[15,0])
 
-        self._login = ttk.Entry(style="EntryStyle.TEntry",master = frame1,width=60, textvariable=login,  background = "#B7D5D4", font = ("Helvetica",24))
+        self._login = ttk.Entry(style="EntryStyle.TEntry",master = frame1,width=60, textvariable=login,  background = "#B7D5D4", font = ("Ubuntu Mono",24))
         self._login.grid(row=2)
 
-        texto2 = ttk.Label(text="Senha",master = frame1, background = "#77878B", foreground = "#373E40", font = ("Helvetica", 24), anchor = W)
+        texto2 = ttk.Label(text="Senha",master = frame1, background = "#77878B", foreground = "#373E40", font = ("Ubuntu Mono", 24), anchor = W)
         texto2.grid(row=3,pady=[15,0])
 
-        self._senha = ttk.Entry(style="EntryStyle.TEntry", master = frame1, width=60, textvariable = senha, show = "*", background = "#B7D5D4", font = ("Helvetica",24))
+        self._senha = ttk.Entry(style="EntryStyle.TEntry", master = frame1, width=60, textvariable = senha, show = "*", background = "#B7D5D4", font = ("Ubuntu Mono",24))
         self._senha.grid(row=4)
 
         ttk.Style().configure("TButton", padding=16, relief="flat",
-        background="#B7D5D4",foreground = '#488286', width = 20, font = ("Helvetica", 20))
+        background="#B7D5D4",foreground = '#488286', width = 20, font = ("Ubuntu Mono", 20))
         
         botao1 = ttk.Button(text="Entrar", master = frame1, width=16, command=self.guardar_logar)
         botao1.grid(row=5,pady=[20,0])
