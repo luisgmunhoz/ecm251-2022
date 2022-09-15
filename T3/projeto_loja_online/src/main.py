@@ -1,95 +1,51 @@
-from cProfile import label
-from turtle import onclick
 import streamlit as st
+    
+with open("src/style.css") as f:
+    st.markdown(f"<style>{f.read()}</style>",unsafe_allow_html= True)
 
-main, info, cadastro = st.tabs(["Home", "Info", "Cadastro"])
 
-with main:
-    st.title("Ola Mundo StreamLit👻😘")
-    st.write("Obrigado Ubiratan!")
-    st.markdown("## Subtítulo de **Seção**:")
-    st.code(
-    """
-def somar(a,b):
-    return a+b
-val1 = 10
-val2 = 12
-print(somar(val1,val2))
-""",
-        language='python'
-    )
-    st.code(
-        """
-        python -m streamlit run arquivo.py
-        """,
-        language='bash'
-    )
+tab1, tab2 = st.tabs(["Home", "Profile"])
 
-    st.metric(
-        label="Total da Compra (R$):",
-        value=105.92
-    )
+with tab1:
+    st.title("Home")
 
-def fui_apertado():
-    print("Ola Mundo!")
+    st.markdown("***")
 
-def somar_dois(v1,v2):
-    resultado = v1+v2
-    st.session_state["kratos"] = resultado
+    col1,col2 = st.columns(2,gap="large")
+    
+    with col1:
+        c = st.container()
+        c.markdown("## Cadeira")
+        c.image("https://lojamor.vteximg.com.br/arquivos/ids/168129-400-400/009401-Cadeira-Eiffel-Mor-Branca.jpg?v=636832571625900000")
+        c.markdown("#### R$ 99,00")
+        c.markdown("#### 25 Unidades em estoque")
+        c.number_input(label = "", format = "%i", step = 1,min_value = 0)
+        c.button(label = "Adicionar")
+    with col2:
+        c = st.container()
+        c.markdown("## Bola")
+    
+    with col1:
+        c = st.container()
+        c.markdown("## Clipes")
 
-with info:
-    numero1 = st.number_input(
-        label="Valor 1:",
-        min_value= 0,
-        max_value = 100
-    )
-    numero2 = st.number_input(
-        label="Valor 2:",
-        min_value= 0,
-        max_value = 100
-    )
+with tab2:
+    st.title("Profile")
 
-    st.button(
-        label="Clicar aqui🍳",
-        help="Clique para ver comida!",
-        on_click=somar_dois,
-        kwargs={"v1":numero1, "v2":numero2}
-    )
+    st.markdown("***")
 
-    if "kratos" in st.session_state:
-        st.metric(
-                label="Resultado:",
-                value=st.session_state["kratos"]
-        )
-    else:
-        st.write("Ainda nenhum calculo foi realizado!")
-
-    option = st.selectbox(
-        'How would you like to be contacted?',
-        ('Email', 'Home phone', 'Mobile phone'))
-
-    st.write('You selected:', option)
-
-with cadastro:
-    col1, col2, col3 = st.columns(3)
+    col1,col2 = st.columns(2)
 
     with col1:
-        st.image(
-            "assets/robin.jpg",
-            caption="Imagem polêmica de pokemon"
-        )
-
-
+        st.markdown("#")
+        st.image("https://i.scdn.co/image/ab6761610000e5eb9319d939accc1f1e22155955")
+    
     with col2:
-        st.image(
-            image="assets/robindisfarcado.jpg",
-            caption="robin disfarcado"
-        )
-
-    with col3:
-        st.image(
-            image="assets/professorcarvalho.webp",
-            caption="Professor Oak"
-        )
-
-st.sidebar.title("Navegação")
+        st.markdown("***")
+        st.markdown("### Nome:")
+        st.markdown("#### Ednaldo P.")
+        st.markdown("***")
+        st.markdown("### Email:")
+        st.markdown("#### Godnaldopereira@gmail.com ")
+        st.markdown("***")
+    
