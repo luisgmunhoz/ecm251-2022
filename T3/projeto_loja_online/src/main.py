@@ -6,26 +6,25 @@ from src.controllers.user_controller import UserController
 with open("src/style.css") as f:
     st.markdown(f"<style>{f.read()}</style>",unsafe_allow_html= True)
     
+if st.session_state["Login"] == "negado":
+    st.text("")
+    st.text("")
 
+    st.title("Login")
 
-st.text("")
-st.text("")
+    st.markdown("***")
 
-st.title("Login")
+    usuario = st.text_input(
+        label="Usuário",
+    )
 
-st.markdown("***")
+    senha = st.text_input(
+        label="Senha",
+            type = "password"
+    )
 
-usuario = st.text_input(
-    label="Usuário",
-)
-
-senha = st.text_input(
-    label="Senha",
-        type = "password"
-)
-
-st.text("")
-st.button(label= "Entrar", on_click= UserController.check_login, args = (UserController(),usuario,senha))
+    st.text("")
+    st.button(label= "Entrar", on_click= UserController.check_login, args = (UserController(),usuario,senha))
 if "Login" in st.session_state:
     st.markdown("#### Login " + st.session_state["Login"])
     if st.session_state["Login"] == "aprovado":
@@ -34,8 +33,8 @@ if "Login" in st.session_state:
             st.title("Profile")
 
             st.markdown("***")
-
-            col1,col2 = st.columns(2)
+            st.text("")
+            col1,col2, col3= st.columns(3)
 
             with col1:
                 st.markdown("#")
@@ -50,7 +49,9 @@ if "Login" in st.session_state:
                 st.markdown("### Email:")
                 st.markdown("#### Godnaldopereira@gmail.com ")
                 st.markdown("***")
-
+            with col3:
+                st.markdown("***")
+                st.button(label= "Sair", on_click= UserController.logout)
         with tab2:
 
             st.title("Home")

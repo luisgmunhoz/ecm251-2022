@@ -6,6 +6,7 @@ from models.user import User
 class UserController():
     def __init__(self) -> None:
         # Carrega os dados dos usuarios
+        st.session_state["Login"] = "negado"
         self.users = [
             User(name="batman",password="robin",email="joao@gmail.com"),
             User(name="joao2",password="arroz2",email="joao@amaarroz.com"),
@@ -23,3 +24,5 @@ class UserController():
                 return True
         st.session_state["Login"] = "negado"
         return False
+    def logout():
+        st.session_state["Login"] = "negado"
