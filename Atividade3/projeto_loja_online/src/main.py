@@ -1,33 +1,44 @@
 import streamlit as st
 
-from src.models import product
+from src.models.product import Product
 from src.controllers.user_controller import UserController
+from src.models.cart import Cart
 
 with open("src/style.css") as f:
     st.markdown(f"<style>{f.read()}</style>",unsafe_allow_html= True)
-    
-st.text("")
-st.text("")
+if "Login" not in st.session_state:
+    st.session_state["Login"] = "negado"
+    st.session_state["Usuario"] = ""
+    st.session_state["email"] = ""
+with st.sidebar:
 
-st.title("Login")
+    st.text("")
+    st.text("")
 
-st.markdown("***")
+    st.title("Login")
 
-user = st.text_input(
-    label="Usuário",
-)
+    st.markdown("***")
 
-password = st.text_input(
-    label="Senha",
-        type = "password"
-)
+    user = st.text_input(
+        label="Usuário",
+    )
 
-st.text("")
-st.button(label= "Entrar", on_click= UserController.check_login, args = (UserController(),user,password))
+    password = st.text_input(
+        label="Senha",
+            type = "password"
+    )
+
+    st.text("")
+    col1, col2 = st.columns(2)
+    with col1:
+        st.button(label= "Entrar", on_click= UserController.check_login, args = (UserController(),user,password))
+    with col2:
+        st.button(label= "Sair", on_click= UserController.logout)
+                    
 if "Login" in st.session_state:
     st.markdown("#### Login " + st.session_state["Login"])
     if st.session_state["Login"] == "aprovado":
-        tab1, tab2, tab3, tab4= st.tabs(["Profile", "Home", "Produto", "Carrinho"])
+        tab1, tab2, tab3= st.tabs(["Profile", "Home", "Carrinho"])
         with tab1: 
             st.title("Profile")
 
@@ -40,55 +51,52 @@ if "Login" in st.session_state:
                 st.image("https://i.scdn.co/image/ab6761610000e5eb9319d939accc1f1e22155955")
                 
             with col2:
-                nome ="Ednaldo P."
                 st.markdown("***")
-                st.markdown("### Nome:")
-                st.markdown("#### %s" % nome)
+                st.markdown(f"### Nome: {st.session_state['Usuario']}")
                 st.markdown("***")
-                st.markdown("### Email:")
-                st.markdown("#### Godnaldopereira@gmail.com ")
+                st.markdown(f"### Email: {st.session_state['Email']}")
                 st.markdown("***")
-            with col3:
-                st.markdown("***")
-                st.button(label= "Sair", on_click= UserController.logout)
+           
         with tab2:
 
             st.title("Home")
-
+            cart = Cart()
             st.markdown("***")
 
             col1,col2 = st.columns(2,gap="large")
                 
             with col1:
+                product1 = Product("Elden Ring", 199.00, "https://image.api.playstation.com/vulcan/ap/rnd/202110/2000/aGhopp3MHppi7kooGE2Dtt8C.png")
                 c = st.container()
-                c.markdown("## Cadeira")
-                c.image("https://lojamor.vteximg.com.br/arquivos/ids/168129-400-400/009401-Cadeira-Eiffel-Mor-Branca.jpg?v=636832571625900000")
-                c.markdown("#### R$ 99,00")
-                c.markdown("#### 25 Unidades em estoque")
-                c.number_input(label = "", format = "%i", step = 1,min_value = 0)
-                c.button(label = "Adicionar")
-            with col2:
-                c = st.container()
-                c.markdown("## Bola")
+                c.markdown(f"## {product1.get_name()}")
+                c.image(f"{product1.get_url()}", width = 256)
                 
-            with col1:
+                c.markdown(f"## R${product1.get_price()}")
+                c.markdown("#### Unidades em estoque")
+                quantity1 = c.number_input(label = "", format = "%i", step = 1,min_value = 0)
+                c.button(label = f"Adicionar {product1.get_name()}", on_click= cart.adicionar(product1))
+            with col2:
+                product2 = Product("Cyberpunk 2077", 199.00, "https://gizmodo.uol.com.br/wp-content/blogs.dir/8/files/2022/09/capsule_616x353.jpg")
                 c = st.container()
-                c.markdown("## Clipes")
+                c.markdown(f"## {product2.get_name()}")
+                c.image(f"{product2.get_url()}",width = 330)
+                c.markdown(f"## R${product2.get_price()}")
+                c.markdown("#### Unidades em estoque")
+                quantity2 = c.number_input(label = "quantity", format = "%i", step = 1,min_value = 0)
+                c.button(label = f"Adicionar {product2.get_name()}", on_click= cart.adicionar(product2))
 
         with tab3:
-            col1,col2 = st.columns([2,1])
+            st.title("Carrinho")
+
+            st.markdown("***")
+
+            col1, col2, col3, col4 = st.columns(4,gap="large")
+            
+            valor_total = cart.get_valor_total()
+            st.markdown(f"## Valor total: {valor_total} ")
             with col1:
-                st.markdown("#")
-                st.image("https://lojamor.vteximg.com.br/arquivos/ids/168129-400-400/009401-Cadeira-Eiffel-Mor-Branca.jpg?v=636832571625900000")
-                
-            with col2:
-                teste = 0
-                st.markdown("# Cadeira")
-                st.markdown("### R$ 99,00")
-                st.markdown("### 25 Unidades em estoque")
-                st.number_input(label = " ", format = "%i", step = 1, min_value = 0)
-                st.button(label = "Adicionar", help = "Adiciona a quantidade selecionada ao carrinho")
-                
-                st.markdown("***")
-                st.markdown("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt sem et felis molestie, at pulvinar massa sagittis. Interdum et malesuada fames ac ante ipsum primis in faucibus. Quisque in vehicula leo. Vivamus a eleifend dolor, ut porttitor eros. Morbi pharetra scelerisque lorem, sed suscipit eros ultricies vel. In volutpat nibh in erat finibus posuere. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam sit amet rhoncus nisi. Nulla sed pulvinar metus. Aenean ligula ante, gravida ut lectus quis, tempor lobortis est. Nulla ac eros pulvinar, hendrerit purus eget, sollicitudin magna. Mauris sit amet massa non tortor tincidunt varius. Suspendisse non ex mauris. Praesent in tellus dictum, egestas lacus nec, aliquam risus.")
+                product_names = []
+                for i in range(cart.get_quantidade_itens()):
+                    product_names.append(cart._products[i].get_name())
+                    st.markdown(f"#### {product_names[i]}")
                     
