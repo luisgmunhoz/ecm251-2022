@@ -36,7 +36,7 @@ with st.sidebar:
         st.button(label= "Sair", on_click= UserController.logout)
                     
 if "Login" in st.session_state:
-    st.markdown("#### Login " + st.session_state["Login"])
+    # st.markdown("#### Login " + st.session_state["Login"])
     if st.session_state["Login"] == "aprovado":
         tab1, tab2, tab3= st.tabs(["Profile", "Home", "Carrinho"])
         with tab1: 
@@ -90,13 +90,31 @@ if "Login" in st.session_state:
 
             st.markdown("***")
 
-            col1, col2, col3, col4 = st.columns(4,gap="large")
+            col1, col2, col3, col4 = st.columns(4,gap="small")
             
             valor_total = cart.get_valor_total()
             st.markdown(f"## Valor total: {valor_total} ")
+            
+            
             with col1:
+                c = st.container()
                 product_names = []
                 for i in range(cart.get_quantidade_itens()):
                     product_names.append(cart._products[i].get_name())
-                    st.markdown(f"#### {product_names[i]}")
-                    
+                    c.markdown(f"#### {product_names[i]}")
+            with col2:
+                c = st.container()
+                product_prices = []
+                for i in range(cart.get_quantidade_itens()):
+                    product_prices.append(cart._products[i].get_price())
+                    c.markdown(f"#### {product_prices[i]}")
+            with col3:
+                c = st.container()
+                product_qtt = []
+                for i in range(cart.get_quantidade_itens()):
+                    product_qtt.append(cart.get_quantidade_itens())
+                    c.markdown(f"#### {product_qtt[i]}")
+            with col4:
+                c = st.container()
+                c.button(label = f"Remover {product_names[0]}", on_click= cart.remover(cart._products[0]))
+                c.button(label = f"Remover {product_names[1]}", on_click= cart.remover(cart._products[0]))

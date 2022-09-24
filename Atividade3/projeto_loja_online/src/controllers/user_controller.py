@@ -28,9 +28,9 @@ class UserController():
                 st.session_state['Email'] = d[name][1]
             else:
                 st.session_state["Login"] = "negado"
-                st.write("Senha Incorreta")
+                st.markdown("# Senha Incorreta")
         except KeyError:
             st.session_state["Login"] = "negado"
-            st.write("Usuário Incorreto")
+            st.markdown("# Usuário Incorreto")
     def logout():
         st.session_state["Login"] = "negado"
