@@ -6,25 +6,24 @@ from src.controllers.user_controller import UserController
 with open("src/style.css") as f:
     st.markdown(f"<style>{f.read()}</style>",unsafe_allow_html= True)
     
-if st.session_state["Login"] == "negado":
-    st.text("")
-    st.text("")
+st.text("")
+st.text("")
 
-    st.title("Login")
+st.title("Login")
 
-    st.markdown("***")
+st.markdown("***")
 
-    usuario = st.text_input(
-        label="Usuário",
-    )
+user = st.text_input(
+    label="Usuário",
+)
 
-    senha = st.text_input(
-        label="Senha",
-            type = "password"
-    )
+password = st.text_input(
+    label="Senha",
+        type = "password"
+)
 
-    st.text("")
-    st.button(label= "Entrar", on_click= UserController.check_login, args = (UserController(),usuario,senha))
+st.text("")
+st.button(label= "Entrar", on_click= UserController.check_login, args = (UserController(),user,password))
 if "Login" in st.session_state:
     st.markdown("#### Login " + st.session_state["Login"])
     if st.session_state["Login"] == "aprovado":
