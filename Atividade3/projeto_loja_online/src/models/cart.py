@@ -2,19 +2,21 @@ import streamlit as st
 
 class Cart():
     def __init__(self):
-        self._products = []
+        self._products = [[]]
 
     def adicionar(self, item, amount):
-        for i in range(amount):
-            if item not in self._products:
+        for i in range(len(self._products)):
+            if item not in self._products[i][0]:
                 self._products.append([item, amount])
+                ii = i
             else:
-                self._products[item] += amount
-                
+                self._products[ii][1] += amount
+            print(self._products)
+
     def get_valor_total(self):
         total = 0
-        for [item, amount] in self._products:
-            total += item.get_price() * amount
+        for lista in self._products:
+            total += lista[0].get_price() * lista[1]
         return total
         
     def get_quantidade_itens(self):

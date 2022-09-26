@@ -11,8 +11,13 @@ if "Login" not in st.session_state:
     st.session_state["Login"] = "negado"
     st.session_state["Usuario"] = ""
     st.session_state["email"] = ""
+    cart = Cart()
 if "cart" not in st.session_state:
     st.session_state["cart"] = "removido"
+
+if "Controller" not in st.session_state:
+    cart = Cart()
+    
 with st.sidebar:
 
     st.text("")
@@ -64,7 +69,7 @@ if "Login" in st.session_state:
         with tab2:
 
             st.title("Home")
-            cart = Cart()
+            
             st.markdown("***")
 
             col1,col2 = st.columns(2,gap="large")
@@ -102,15 +107,10 @@ if "Login" in st.session_state:
             product_names = []
             product_prices = []
             for i in range(0, cart.get_quantidade_itens()):
-                if cart._products[i][0].get_name() not in product_names:
-                    product_names.append(cart._products[i][0].get_name())
-                    product_prices.append(cart._products[i][0].get_price())
-                    product_qtt.append(cart._products[i][1])
-                    amount1 = product_qtt[i]
-                    ii = i
-                else:
-                    amount1 += cart._products[i][1]
-                    product_qtt.insert(ii, amount1)
+                product_names.append(cart._products[i][0].get_name())
+                product_prices.append(cart._products[i][0].get_price())
+                product_qtt.append(cart._products[i][1])
+                    
             with col1:
                 c = st.container()
                 for i in range(len(product_names)):
