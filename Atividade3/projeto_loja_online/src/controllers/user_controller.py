@@ -5,7 +5,7 @@ class UserController():
     def __init__(self):
         # Carrega os dados dos usuários
         self.users = [
-            User(name="batman", password = "robin", email = "bruce@wayneenterprises.com"),
+            User(name="robin", password = "batman", email = "damian@wayneenterprises.com"),
             User(name="João2", password = "arroz2", email = "joao2@gmail.com"),
             User(name ="tais", password="petacular", email = "tais@perando.com")
         ]
