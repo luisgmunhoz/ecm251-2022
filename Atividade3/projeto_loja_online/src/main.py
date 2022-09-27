@@ -1,23 +1,22 @@
 import streamlit as st
 
-from src.models.product import Product
 from src.controllers.user_controller import UserController
-from src.models.cart import Cart
 from src.controllers.product_controller import ProductController
+from src.controllers.cart_controller import CartController
+
+p_controller = ProductController()
+
+st.set_page_config(page_title="Projeto Loja Online T3 Luis Guilherme", page_icon="assets/batman.png")
 
 with open("src/style.css") as f:
     st.markdown(f"<style>{f.read()}</style>",unsafe_allow_html= True)
+
 if "Login" not in st.session_state:
     st.session_state["Login"] = "negado"
     st.session_state["Usuario"] = ""
     st.session_state["email"] = ""
-    cart = Cart()
-if "cart" not in st.session_state:
-    st.session_state["cart"] = "removido"
+    st.session_state["Cart"] = CartController()
 
-if "Controller" not in st.session_state:
-    cart = Cart()
-    
 with st.sidebar:
 
     st.text("")
@@ -35,7 +34,7 @@ with st.sidebar:
         label="Senha",
             type = "password"
     )
-    p_controller = ProductController()
+    
 
     st.text("")
     col1, col2 = st.columns(2)
@@ -73,43 +72,74 @@ if "Login" in st.session_state:
             st.markdown("***")
 
             col1,col2 = st.columns(2,gap="large")
-                
+
             with col1:
                 product = p_controller.get_product(index = 0)
                 c = st.container()
                 c.markdown(f"## {product.get_name()}")
-                c.image(f"{product.get_url()}", width = 280)
+                c.image(f"{product.get_url()}")
                 
                 c.markdown(f"## R${product.get_price()}")
-                quantity1 = c.number_input(label = "", format = "%i", step = 1,min_value = 0)
-                c.button(label = f"Adicionar {product.get_name()}", key = 1, on_click= cart.adicionar(item = product, amount = quantity1))
+                quantity1 = c.number_input(label = "", key = 1, format = "%i", step = 1,min_value = 1, max_value = 10)
+                c.button(label = f"Adicionar {product.get_name()}", key = 2, on_click= st.session_state["Cart"].add_product, args = (product, quantity1))
             with col2:
                 product = p_controller.get_product(index = 1)
                 c = st.container()
                 c.markdown(f"## {product.get_name()}")
-                c.image(f"{product.get_url()}",width = 300)
+                c.image(f"{product.get_url()}")
                 c.markdown(f"## R${product.get_price()}")
-                quantity2 = c.number_input(label = "quantity", format = "%i", step = 1,min_value = 0)
-                c.button(label = f"Adicionar {product.get_name()}", key = 2, on_click= cart.adicionar(item = product, amount = quantity2))
-
+                quantity2 = c.number_input(label = "", key = 3, format = "%i", step = 1,min_value = 1, max_value = 10)
+                c.button(label = f"Adicionar {product.get_name()}", key = 4, on_click= st.session_state["Cart"].add_product, args = (product, quantity2))
+            with col1:
+                product = p_controller.get_product(index = 2)
+                c = st.container()
+                c.markdown(f"## {product.get_name()}")
+                c.image(f"{product.get_url()}")
+                c.markdown(f"## R${product.get_price()}")
+                quantity1 = c.number_input(label = "",key = 5, format = "%i", step = 1,min_value = 1, max_value = 10)
+                c.button(label = f"Adicionar {product.get_name()}", key = 6, on_click= st.session_state["Cart"].add_product, args = (product, quantity1))
+            with col2:
+                product = p_controller.get_product(index = 3)
+                c = st.container()
+                c.markdown(f"## {product.get_name()}")
+                c.image(f"{product.get_url()}")
+                c.markdown(f"## R${product.get_price()}")
+                quantity1 = c.number_input(label = "",key = 7, format = "%i", step = 1,min_value = 1, max_value = 10)
+                c.button(label = f"Adicionar {product.get_name()}", key = 8, on_click= st.session_state["Cart"].add_product, args = (product, quantity1))
+            with col1:
+                product = p_controller.get_product(index = 4)
+                c = st.container()
+                c.markdown(f"## {product.get_name()}")
+                c.image(f"{product.get_url()}")
+                c.markdown(f"## R${product.get_price()}")
+                quantity1 = c.number_input(label = "",key = 9, format = "%i", step = 1,min_value = 1, max_value = 10)
+                c.button(label = f"Adicionar {product.get_name()}", key = 10, on_click= st.session_state["Cart"].add_product, args = (product, quantity1))
+            with col2:
+                product = p_controller.get_product(index = 5)
+                c = st.container()
+                c.markdown(f"## {product.get_name()}")
+                c.image(f"{product.get_url()}")
+                c.markdown(f"## R${product.get_price()}")
+                quantity1 = c.number_input(label = "",key = 11, format = "%i", step = 1,min_value = 1, max_value = 10)
+                c.button(label = f"Adicionar {product.get_name()}", key = 12, on_click= st.session_state["Cart"].add_product, args = (product, quantity1))
         with tab3:
             st.title("Carrinho")
 
             st.markdown("***")
 
-            col1, col2, col3, col4 = st.columns(4,gap="small")
+            col1, col2, col3 = st.columns(3,gap="large")
             
-            valor_total = cart.get_valor_total()
-            if st.session_state["cart"] != "removido": 
-                st.markdown(f"## Valor total: {valor_total} ")
+            valor_total = st.session_state["Cart"].get_total_price()
+            
+            st.markdown(f"## Valor total: R${valor_total} ")
             
             product_qtt = []
             product_names = []
             product_prices = []
-            for i in range(0, cart.get_quantidade_itens()):
-                product_names.append(cart._products[i][0].get_name())
-                product_prices.append(cart._products[i][0].get_price())
-                product_qtt.append(cart._products[i][1])
+            for i in range(0, len(st.session_state["Cart"]._cart._products)):
+                product_names.append(st.session_state["Cart"]._cart._products[i][0].get_name())
+                product_prices.append(st.session_state["Cart"]._cart._products[i][0].get_price())
+                product_qtt.append(st.session_state["Cart"]._cart._products[i][1])
                     
             with col1:
                 c = st.container()
@@ -118,7 +148,7 @@ if "Login" in st.session_state:
             with col2:
                 c = st.container()
                 for i in range(len(product_names)):
-                    c.markdown(f"#### {product_prices[i]}")
+                    c.markdown(f"#### R${product_prices[i]}")
             with col3:
                 c = st.container()
                 for i in range(len(product_names)):

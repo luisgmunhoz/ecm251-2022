@@ -1,7 +1,8 @@
 .stButton > button {
     background-color: #B7D5D4;
     height:50px;
-    color: #488286
+    color: #488286;
+    border-radius:22px;
 }
 .st-ce{
     color: #B7D5D4;
@@ -132,4 +133,3 @@ div{
 p{
     font-family: "Ubuntu", sans-serif;
 }
-
