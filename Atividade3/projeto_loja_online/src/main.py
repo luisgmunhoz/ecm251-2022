@@ -18,31 +18,34 @@ if "Login" not in st.session_state:
     st.session_state["Cart"] = CartController()
 
 with st.sidebar:
+    if st.session_state["Login"] == "negado":
+        st.text("")
+        st.text("")
 
-    st.text("")
-    st.text("")
+        st.title("Login")
 
-    st.title("Login")
+        st.markdown("***")
 
-    st.markdown("***")
+        user = st.text_input(
+            label="Usuário",
+        )
 
-    user = st.text_input(
-        label="Usuário",
-    )
+        password = st.text_input(
+            label="Senha",
+                type = "password"
+        )
+        
 
-    password = st.text_input(
-        label="Senha",
-            type = "password"
-    )
-    
+        st.text("")
 
-    st.text("")
-    col1, col2 = st.columns(2)
-    with col1:
         st.button(label= "Entrar", on_click= UserController.check_login, args = (UserController(),user,password))
-    with col2:
+    if st.session_state["Login"] == "aprovado":
+        st.text("")
+
+        st.title(f"Bem vindo, {st.session_state['Usuario']}")
+        st.markdown("***")
         st.button(label= "Sair", on_click= UserController.logout)
-                    
+        st.markdown("***")
 if "Login" in st.session_state:
     # st.markdown("#### Login " + st.session_state["Login"])
     if st.session_state["Login"] == "aprovado":
@@ -78,7 +81,6 @@ if "Login" in st.session_state:
                 c = st.container()
                 c.markdown(f"## {product.get_name()}")
                 c.image(f"{product.get_url()}")
-                
                 c.markdown(f"## R${product.get_price()}")
                 quantity1 = c.number_input(label = "", key = 1, format = "%i", step = 1,min_value = 1, max_value = 10)
                 c.button(label = f"Adicionar {product.get_name()}", key = 2, on_click= st.session_state["Cart"].add_product, args = (product, quantity1))
@@ -128,18 +130,19 @@ if "Login" in st.session_state:
             st.markdown("***")
 
             col1, col2, col3 = st.columns(3,gap="large")
+            col1.markdown("### Produto")
+            col2.markdown("### Preço")
+            col3.markdown("### Quantidade")
             
-            valor_total = st.session_state["Cart"].get_total_price()
             
-            st.markdown(f"## Valor total: R${valor_total} ")
             
             product_qtt = []
             product_names = []
             product_prices = []
-            for i in range(0, len(st.session_state["Cart"]._cart._products)):
-                product_names.append(st.session_state["Cart"]._cart._products[i][0].get_name())
-                product_prices.append(st.session_state["Cart"]._cart._products[i][0].get_price())
-                product_qtt.append(st.session_state["Cart"]._cart._products[i][1])
+            for i in range(0, len(st.session_state["Cart"].get_cart().get_products())):
+                product_names.append(st.session_state["Cart"].get_cart().get_products()[i][0].get_name())
+                product_prices.append(st.session_state["Cart"].get_cart().get_products()[i][0].get_price())
+                product_qtt.append(st.session_state["Cart"].get_cart().get_products()[i][1])
                     
             with col1:
                 c = st.container()
@@ -153,3 +156,9 @@ if "Login" in st.session_state:
                 c = st.container()
                 for i in range(len(product_names)):
                     c.markdown(f"#### {product_qtt[i]}")
+
+            st.markdown("***")
+            valor_total = st.session_state["Cart"].get_total_price()
+            
+            st.markdown(f"## Valor total: R${valor_total:.3f} ")
+        
