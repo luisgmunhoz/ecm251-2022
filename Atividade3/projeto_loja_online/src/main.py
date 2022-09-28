@@ -49,9 +49,9 @@ with st.sidebar:
 if "Login" in st.session_state:
     # st.markdown("#### Login " + st.session_state["Login"])
     if st.session_state["Login"] == "aprovado":
-        tab1, tab2, tab3= st.tabs(["Profile", "Home", "Carrinho"])
+        tab1, tab2, tab3= st.tabs(["Perfil", "Home", "Carrinho"])
         with tab1: 
-            st.title("Profile")
+            st.title("Perfil")
 
             st.markdown("***")
             st.text("")
@@ -139,10 +139,10 @@ if "Login" in st.session_state:
             product_qtt = []
             product_names = []
             product_prices = []
-            for i in range(0, len(st.session_state["Cart"].get_cart().get_products())):
-                product_names.append(st.session_state["Cart"].get_cart().get_products()[i][0].get_name())
-                product_prices.append(st.session_state["Cart"].get_cart().get_products()[i][0].get_price())
-                product_qtt.append(st.session_state["Cart"].get_cart().get_products()[i][1])
+            for produquantity in st.session_state["Cart"].get_cart().get_products():
+                product_names.append(produquantity[0].get_name())
+                product_prices.append(produquantity[0].get_price())
+                product_qtt.append(produquantity[1])
                     
             with col1:
                 c = st.container()
