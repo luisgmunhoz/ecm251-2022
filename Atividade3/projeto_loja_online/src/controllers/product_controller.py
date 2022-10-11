@@ -1,8 +1,10 @@
+# Luis Guilherme de Souza Munhoz RA: 20.01937-8
+
 from models.product import Product
 
 class ProductController:
     def __init__(self):
-        
+
         self._products = [
             Product("Elden Ring", 199.99, "https://assets-prd.ignimgs.com/2021/06/12/elden-ring-button-03-1623460560664.jpg?width=300&crop=1%3A1%2Csmart"),
             Product("Cyberpunk 2077", 129.99, "https://sm.ign.com/t/ign_br/game/c/cyberpunk-/cyberpunk-2077_tdqt.300.jpg"),

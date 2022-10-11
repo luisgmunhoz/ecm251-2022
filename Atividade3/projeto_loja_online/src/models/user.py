@@ -1,3 +1,5 @@
+# Luis Guilherme de Souza Munhoz RA: 20.01937-8
+
 class User():
     def __init__(self, name, email, password):
         self._name = name
