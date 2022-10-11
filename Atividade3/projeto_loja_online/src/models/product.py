@@ -1,4 +1,5 @@
 # Luis Guilherme de Souza Munhoz RA: 20.01937-8
+
 class Product():
     def __init__(self, name, price, url):
         self._name = name
