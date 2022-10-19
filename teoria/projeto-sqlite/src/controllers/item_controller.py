@@ -6,7 +6,7 @@ class ItemController:
         pass
 
     def pegar_item(self, id) -> Item:
-        item = algo()
+        item = ItemDAO.get_instance().pegar_item(id)
         return item
 
     def inserir_item(self, item) -> bool:
