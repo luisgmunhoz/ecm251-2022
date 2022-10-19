@@ -26,3 +26,12 @@ class ItemDAO:
             resultados.append(Item(id = resultado[0], nome = resultado[1], preco = resultado[2]))
         self.cursor.close()
         return resultados
+
+    def inserir_item(self, item):
+        self.cursor = self.conn.cursor()
+        self.cursor.execute("""
+            INSERT INTO Itens(id, nome, preco)
+            Values(?,?,?);
+        """, (item.id, item.nome, item.preco))
+        self.conn.commit()
+        self.cursor.close()
