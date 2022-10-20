@@ -1,5 +1,5 @@
 import sqlite3
-from src.models.item import Item
+from src.models.pedido import Pedido
 
 class PedidoDAO:
     _instance = None
@@ -23,16 +23,16 @@ class PedidoDAO:
         """)
         resultados = []
         for resultado in self.cursor.fetchall():
-            resultados.append(Item(id = resultado[0], nome = resultado[1], preco = resultado[2]))
+            resultados.append(Pedido(id = resultado[0], id_item = resultado[1], id_cliente = resultado[2], quantidade = resultado[3], numero_pedido = resultado[4], data_hora = resultado[5]))
         self.cursor.close()
         return resultados
 
-    def inserir_item(self, item):
+    def inserir_item(self, pedido):
         self.cursor = self.conn.cursor()
         self.cursor.execute("""
             INSERT INTO Pedidos(id, nome, preco)
             Values(?,?,?);
-        """, (item.id, item.nome, item.preco))
+        """, (pedido.id, pedido.nome, pedido.preco))
         self.conn.commit()
         self.cursor.close()
 
@@ -42,21 +42,21 @@ class PedidoDAO:
             SELECT * FROM Pedidos
             WHERE id = '{id}';
         """)
-        item  = None
+        pedido  = None
         resultado = self.cursor.fetchone()
         if resultado != None:
-            item = (Item(id = resultado[0], nome = resultado[1], preco = resultado[2]))
+            pedido = (Pedido(id = resultado[0], nome = resultado[1], preco = resultado[2]))
         self.cursor.close()
-        return item
+        return pedido
 
-    def atualizar_item(self, item):
+    def atualizar_item(self, pedido):
         try:
             self.cursor = self.conn.cursor()
             self.cursor.execute(f"""
                 UPDATE Pedidos SET
-                nome = '{item.nome}',
-                preco = {item.preco}
-                WHERE id = '{item.id}'
+                nome = '{pedido.nome}',
+                preco = {pedido.preco}
+                WHERE id = '{pedido.id}'
             """)
             self.conn.commit()
             self.cursor.close()
@@ -85,6 +85,6 @@ class PedidoDAO:
         """)
         resultados = []
         for resultado in self.cursor.fetchall():
-            resultados.append(Item(id = resultado[0], nome = resultado[1], preco = resultado[2]))
+            resultados.append(Pedido(id = resultado[0], nome = resultado[1], preco = resultado[2]))
         self.cursor.close()
         return resultados
