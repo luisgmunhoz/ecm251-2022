@@ -30,3 +30,19 @@ print()
 
 item = controller.pegar_item("CAF6")
 print(item)
+
+
+
+item = controller.pegar_item("SQL")
+item.nome = "RTX 4090"
+item.preco = 13500
+
+print(controller.atualizar_item(item))
+
+
+print(controller.deletar_item(item.id))
+
+items = controller.pegar_todos_itens()
+
+for item in items:
+    print(item)

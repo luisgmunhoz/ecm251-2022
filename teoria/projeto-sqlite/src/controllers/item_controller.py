@@ -15,6 +15,13 @@ class ItemController:
         except:
             return False
         return True
+    
     def pegar_todos_itens(self) -> list[Item]:
         itens = ItemDAO.get_instance().get_all()
         return itens
+    
+    def atualizar_item(self, item) -> bool:
+        return ItemDAO.get_instance().atualizar_item(item)
+    
+    def deletar_item(self, id):
+        return ItemDAO.get_instance().deletar_item(id)
