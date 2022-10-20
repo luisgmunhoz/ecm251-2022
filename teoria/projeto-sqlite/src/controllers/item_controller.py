@@ -23,5 +23,5 @@ class ItemController:
     def atualizar_item(self, item) -> bool:
         return ItemDAO.get_instance().atualizar_item(item)
     
-    def deletar_item(self, id):
+    def deletar_item(self, id) -> bool:
         return ItemDAO.get_instance().deletar_item(id)
