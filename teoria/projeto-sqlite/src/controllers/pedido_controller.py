@@ -29,12 +29,6 @@ class PedidoController:
         itens = PedidoDAO.get_instance().get_all()
         return itens
     
-    def atualizar_pedido(self, pedido) -> bool:
-        return PedidoDAO.get_instance().atualizar_pedido(pedido)
-    
-    def deletar_pedido(self, id) -> bool:
-        return PedidoDAO.get_instance().deletar_pedido(id)
-    
-    def buscar_todos_itens_nome(self, nome) -> list[Pedido]:
-        itens = PedidoDAO.get_instance().search_all_for_name(nome)
-        return itens
+    def get_pedido(self, numero_pedido) -> list[Pedido]:
+        pedido = PedidoDAO.get_instance().get_itens(numero_pedido)
+        return pedido
