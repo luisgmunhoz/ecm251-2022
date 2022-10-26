@@ -14,8 +14,8 @@ class PedidoController:
             item = item_controller.pegar_item(item_id)
             total += item.preco * quantidade
             
-    def pegar_pedido(self, id) -> Pedido:
-        pedido = PedidoDAO.get_instance().pegar_pedido(id)
+    def pegar_pedido(self, numero_pedido) -> list[Pedido]:
+        pedido = PedidoDAO.get_instance().pegar_pedido(numero_pedido)
         return pedido
 
     def inserir_pedido(self, pedido) -> bool:
