@@ -21,13 +21,12 @@ class PedidoController:
     def atualizar_pedido(self, pedido) -> bool:
         return PedidoDAO.get_instance().atualizar_pedido(pedido)
 
-    def inserir_pedido(self, pedido) -> bool:
-        try:
-            PedidoDAO.get_instance().inserir_pedido(pedido)
-        except:
-            return False
-        return True
+    def deletar_pedido(self, id) -> bool:
+        return PedidoDAO.get_instance().deletar_item(id)
     
+    def inserir_pedido(self, pedido) -> None:
+        PedidoDAO.get_instance().inserir_pedido(pedido)
+            
     def pegar_todos_itens(self) -> list[Pedido]:
         itens = PedidoDAO.get_instance().get_all()
         return itens
