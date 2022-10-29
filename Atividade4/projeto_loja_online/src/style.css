@@ -1,0 +1,151 @@
+.stButton > button {
+    background-color: #B7D5D4;
+    height:50px;
+    color: #488286;
+    border-radius:22px;
+}
+.st-ce{
+    color: #B7D5D4;
+    background-color: #488286;
+}
+.st-e0{
+    color: #B7D5D4;
+    background-color: #488286;
+}
+.st-du{
+    color: #B7D5D4;
+    background-color: #488286;
+}
+.st-dg{
+    color: #B7D5D4;
+    background-color: #488286;
+}
+.st-dj{
+    color: #B7D5D4;
+    background-color: #488286;
+}
+.css-81oif8 {
+    font-size: 14px;
+    color: #373E40;
+    background-color: #77878B;
+    display: flex;
+    visibility: visible;
+    margin-bottom: 0.5rem;
+    height: auto;
+    min-height: 1.5rem;
+    vertical-align: middle;
+    flex-direction: row;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.css-12oz5g7 {
+    flex: 1 1 0%;
+    width: 100%;
+    padding: 6rem 1rem 10rem;
+    max-width: 46rem;
+    background-color: #77878B;
+}
+.css-1wrcr25 {
+    display: flex;
+    flex-direction: row;
+    -webkit-box-pack: start;
+    place-content: flex-start;
+    -webkit-box-align: stretch;
+    align-items: stretch;
+    position: absolute;
+    inset: 0px;
+    overflow: hidden;
+    background-color: #373E40;
+}
+
+.css-1r8izn3:last-of-type {
+    border-top-right-radius: 0.25rem;
+    border-bottom-right-radius: 0.25rem;
+    background-color: #B7D5D4;
+    color: #305252;
+}
+
+
+.css-1r8izn3 {
+    margin: 0px;
+    border: none;
+    height: 100%;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 32px;
+    -webkit-box-pack: center;
+    justify-content: center;
+    color: rgb(49, 51, 63);
+    transition: color 300ms ease 0s, backgroundColor 300ms ease 0s;
+    background-color: rgb(240, 242, 246);
+    background-color: #B7D5D4;
+    color: #305252;
+}
+
+.css-hxt7ib {
+    padding-top: 6rem;
+    background-color: #373E40;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+.css-128j0gw {
+    padding-left: 0px;
+    background-color: #77878B;
+    padding-right: 0px;
+}
+
+.css-6qob1r {
+    position: relative;
+    height: 100%;
+    background-color: #373E40;
+    width: 100%;
+    overflow: overlay;
+}
+
+.css-fblp2m {
+    vertical-align: middle;
+    overflow: hidden;
+    color: inherit;
+    color: #B7D5D4;
+    background-color: #488286;
+    fill: currentcolor;
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    font-size: 1.25rem;
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.css-18ni7ap {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    height: 2.875rem;
+    background-color: #373E40; 
+    outline: none;
+    z-index: 999990;
+    display: block;
+}
+
+
+[type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
+    cursor: pointer;
+    background-color: #488286;
+    color: #B7D5D4
+}
+.css-1r8izn3:disabled {
+    cursor: allowed;
+    color: #488286
+}
+
+div{
+    font-family: "Ubuntu", sans-serif;
+}
+
+p{
+    font-family: "Ubuntu", sans-serif;
+}
