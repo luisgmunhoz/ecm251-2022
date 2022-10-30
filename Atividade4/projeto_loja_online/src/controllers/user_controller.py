@@ -8,12 +8,12 @@ from src.dao.user_dao import UserDAO
 class UserController():
     def __init__(self):
         # Carrega os dados dos usuários
-        self.users = UserDAO.get_instance().get_all()
+        self._users = UserDAO.get_instance().get_all()
 
     def check_login(self, email, password):
         user_test = User(name = None, password = password, email=email, cpf = None)
         user_dict = {}
-        for user in self.users:
+        for user in self._users:
             user_email = user.get_email()
             passw = user.get_password()
             user_dict[user_email] = (passw, [user.get_name(), user.get_cpf()])
