@@ -1,5 +1,6 @@
 # Luis Guilherme de Souza Munhoz RA: 20.01937-8
 
+from re import S
 import streamlit as st
 
 from src.controllers.user_controller import UserController
@@ -14,7 +15,7 @@ with open("src/style.css") as f:
     st.markdown(f"<style>{f.read()}</style>",unsafe_allow_html= True)
 
 if "Login" not in st.session_state:
-
+    st.session_state["Profile"] = "dados"
     st.session_state["Login"] = "negado"
     st.session_state["Usuario"] = ""
     st.session_state["email"] = ""
@@ -91,7 +92,7 @@ if "Login" in st.session_state:
 
     # st.markdown("#### Login " + st.session_state["Login"])
     if st.session_state["Login"] == "aprovado":
-        tab1, tab2, tab3= st.tabs(["Perfil", "Home", "Carrinho"])
+        tab1, tab2, tab3, tab4= st.tabs(["Perfil", "Home", "Carrinho", "Configurações"])
 
         with tab1: 
 
@@ -99,7 +100,7 @@ if "Login" in st.session_state:
 
             st.markdown("***")
             st.text("")
-            col1,col2, col3= st.columns(3)
+            col1,col2 = st.columns(2)
 
             with col1:
 
@@ -107,14 +108,33 @@ if "Login" in st.session_state:
                 st.image("https://i.pinimg.com/736x/ea/8b/c0/ea8bc0fd9e2bf37e9ad09f056ff6ebc6.jpg")
                 
             with col2:
+                if st.session_state["Profile"] == "dados":
+                    st.markdown("***")
+                    st.markdown(f"### Nome: {st.session_state['Usuario']}")
+                    st.markdown("***")
+                    st.markdown(f"### Email: {st.session_state['Email']}")
+                    st.markdown("***")
+                    st.markdown(f"### CPF: {st.session_state['Cpf']}")
+                    st.markdown("***")
+                    st.button("Mudar informações de login", on_click = UserController.change_login_data)
 
-                st.markdown("***")
-                st.markdown(f"### Nome: {st.session_state['Usuario']}")
-                st.markdown("***")
-                st.markdown(f"### Email: {st.session_state['Email']}")
-                st.markdown("***")
-                st.markdown(f"### CPF: {st.session_state['Cpf']}")
-           
+            if st.session_state["Profile"] == "change":
+                email = st.text_input(
+                    label="Novo Email",
+                        key = 82,
+                )
+
+                password = st.text_input(
+                    label="Nova Senha",
+                        type = "password",
+                            key = 56,
+                )
+                col3, col4 = st.columns(2)
+                with col3:
+                    st.button(label = "Voltar", on_click = UserController.go_back)
+                
+                with col4:
+                    st.button(label= "Alterar", on_click= UserController.change_data, args = (UserController(), email, password))
         with tab2:
 
             st.title("Home")
@@ -228,4 +248,4 @@ if "Login" in st.session_state:
             valor_total = st.session_state["Cart"].get_total_price()
             
             st.markdown(f"## Valor total: R${valor_total:.3f} ")
-        
+            

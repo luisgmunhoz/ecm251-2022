@@ -54,9 +54,10 @@ class UserDAO:
             self.cursor = self.conn.cursor()
             self.cursor.execute(f"""
                 UPDATE Users SET
-                name = '{user.name}',
-                password = {user.password}
-                WHERE email = '{user.email}'
+                email = '{user.get_email()}',
+                password = '{user.get_password()}'
+                WHERE cpf = '{user.get_cpf()}'
+                
             """)
             self.conn.commit()
             self.cursor.close()

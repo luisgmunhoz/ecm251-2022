@@ -11,7 +11,6 @@ class UserController():
         self._users = UserDAO.get_instance().get_all()
 
     def check_login(self, email, password):
-        user_test = User(name = None, password = password, email=email, cpf = None)
         user_dict = {}
         for user in self._users:
             user_email = user.get_email()
@@ -40,9 +39,25 @@ class UserController():
        
         try:
             UserDAO.get_instance().inserir_user(user)
-        except Exception as e:
-            st.markdown(e)
+            st.markdwon("Registrado")
+        except:
+            st.markdown("Email ou cpf já registrados")
 
     def logout():
         st.session_state["Login"] = "negado"
         st.session_state["Cart"] = CartController()
+    
+    def change_data(self, email, password):
+        user = User(st.session_state['Usuario'], email, password, st.session_state['Cpf'])
+        print(user)
+        try:
+            UserDAO.get_instance().atualizar_user(user)
+            st.markdown("Alterações Sucesso")
+        except:
+            st.markdown("Email já registrado")
+    
+    def change_login_data():
+        st.session_state["Profile"] = "change"
+
+    def go_back():
+        st.session_state["Profile"] = "dados"
