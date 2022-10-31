@@ -4,6 +4,7 @@ import streamlit as st
 from src.models.user import User
 from src.controllers.cart_controller import CartController
 from src.dao.user_dao import UserDAO
+import time
 
 class UserController():
     def __init__(self):
@@ -26,6 +27,7 @@ class UserController():
                 
             else:
                 st.session_state["Login"] = "errado"
+
         except KeyError:
 
             st.session_state["Login"] = "errado"
@@ -46,7 +48,6 @@ class UserController():
     
     def change_data(self, email, password):
         user = User(st.session_state['Usuario'], email, password, st.session_state['Cpf'])
-        print(user)
         try:
             UserDAO.get_instance().atualizar_user(user)
             st.markdown("Alterações Sucesso")
@@ -64,3 +65,8 @@ class UserController():
     
     def login_screen():
         st.session_state["Login"] = "negado"
+    
+    def home_screen():
+        st.session_state["Login"] = "negado"
+        time.sleep(0.2)
+        st.session_state["Login"] = "aprovado"

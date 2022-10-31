@@ -83,6 +83,7 @@ with st.sidebar:
             label="CPF",
                 key = 4,
         )
+
         col1, col2 = st.columns(2)
         with col1:
             st.text("")
@@ -104,7 +105,7 @@ if "Login" in st.session_state:
 
     # st.markdown("#### Login " + st.session_state["Login"])
     if st.session_state["Login"] == "aprovado":
-        tab1, tab2, tab3 = st.tabs(["Perfil", "Home", "Carrinho"])
+        tab1, tab2, tab3, tab4 = st.tabs(["Perfil", "Home", "Carrinho", "Cadastrar Produto"])
 
         with tab1: 
 
@@ -120,6 +121,7 @@ if "Login" in st.session_state:
                 st.image("https://i.pinimg.com/736x/ea/8b/c0/ea8bc0fd9e2bf37e9ad09f056ff6ebc6.jpg")
                 
             with col2:
+
                 if st.session_state["Profile"] == "dados":
                     st.markdown("***")
                     st.markdown(f"### Nome: {st.session_state['Usuario']}")
@@ -164,9 +166,13 @@ if "Login" in st.session_state:
                     product = p_controller.get_product(index = i)
                     c = st.container()
                     c.markdown(f"## {product.get_name()}")
-                    c.image(f"{product.get_url()}")
-                    c.markdown(f"## R${product.get_price()}")
                     try:
+                        c.image(f"{product.get_url()}")
+                    except:
+                        c.image("https://www.thesslstore.com/blog/wp-content/uploads/2018/10/bigstock-Error-Browser-Vector-Icon-Fil-242176321-e1540917868244-300x300.jpg")
+                    
+                    try:
+                        c.markdown(f"## R${product.get_price()}")
                         quantity1 = c.number_input(label = "", key = 100 * (i+1), format = "%i", step = 1,min_value = 1, max_value = product.get_amount())
                         c.button(label = f"Adicionar {product.get_name()}", key = 200 * (i+12), on_click= st.session_state["Cart"].add_product, args = (product, quantity1))
                     except:
@@ -176,14 +182,18 @@ if "Login" in st.session_state:
                     product = p_controller.get_product(index = i + 1)
                     c = st.container()
                     c.markdown(f"## {product.get_name()}")
-                    c.image(f"{product.get_url()}")
-                    c.markdown(f"## R${product.get_price()}")
-
                     try:
+                        c.image(f"{product.get_url()}")
+                    except:
+                        c.image("https://www.thesslstore.com/blog/wp-content/uploads/2018/10/bigstock-Error-Browser-Vector-Icon-Fil-242176321-e1540917868244-300x300.jpg")
+                    
+                    try:
+                        c.markdown(f"## R${product.get_price()}")
                         quantity2 = c.number_input(label = "",  format = "%i", key = 300 * (i+83), step = 1,min_value = 1, max_value = product.get_amount())
                         c.button(label = f"Adicionar {product.get_name()}", key = 400 * (i+99), on_click= st.session_state["Cart"].add_product, args = (product, quantity2))
                     except:
                         c.markdown(f"## {product.get_name()} em falta")
+
         with tab3:
 
             st.title("Carrinho")
@@ -229,4 +239,43 @@ if "Login" in st.session_state:
             valor_total = st.session_state["Cart"].get_total_price()
             
             st.markdown(f"## Valor total: R${valor_total:.3f} ")
-            st.button(label = "Finalizar Pedido", key = 998, on_click= st.session_state["Cart"].clear_cart())
+            st.button(label = "Finalizar Pedido", key = 998, on_click= st.session_state["Cart"].clear_cart)
+        
+        with tab4:
+
+            st.text("")
+            st.text("")
+
+            st.title("Cadastro De Produtos")
+
+            st.markdown("***")
+            
+            name1 = st.text_input(
+                label= "Name",
+                    key = 190,
+            )
+
+            price1 = st.number_input(
+                label="Preço",
+                    key = 191,
+            )
+
+            url1 = st.text_input(
+                label="URL Da Imagem",
+                    key = 192,
+            )
+
+            amount1 = st.number_input(
+                label = "Quantidade",
+                    key = 193,
+            )
+
+            col1, col2 = st.columns(2)
+            
+            with col1:
+                st.text("")
+                st.button(label= "Voltar", on_click= UserController.home_screen)
+
+            with col2:
+                st.text("")
+                st.button(label= "Cadastrar produto", on_click= ProductController.sign_product, args = (ProductController(), name1, price1, url1, amount1))

@@ -30,8 +30,12 @@ class CartController():
         return total
     
     def clear_cart(self):
-        for item in self.get_cart().get_products():
-            item[0].set_amount(item[0].get_amount() - item[1])
-            ProductDAO.get_instance().atualizar_product(item[0])
-            self.get_cart().get_products().pop(0)
-        return
+        try:
+            for item in self.get_cart().get_products():
+                item[0].set_amount(item[0].get_amount() - item[1])
+                ProductDAO.get_instance().atualizar_product(item[0])
+                self.get_cart().get_products().pop(0)
+            return True
+        except:
+            return False
+

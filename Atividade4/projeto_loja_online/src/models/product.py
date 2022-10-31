@@ -21,5 +21,6 @@ class Product():
     
     def set_amount(self, amount):
         self._amount = amount
+
     def __str__(self):
-        return f'Product(_name:{self.get_name()}, _price:{self.get_price()}, _url:{self.get_url()})'
+        return f'Product(name:{self.get_name()}, price:{self.get_price()}, url:{self.get_url()}, amount:{self.get_amount()})'
