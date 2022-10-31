@@ -1,7 +1,6 @@
 # Luis Guilherme de Souza Munhoz RA: 20.01937-8
 
 import random
-from re import S
 import streamlit as st
 
 from src.controllers.user_controller import UserController
@@ -20,6 +19,7 @@ if "Login" not in st.session_state:
     st.session_state["Login"] = "negado"
     st.session_state["Usuario"] = ""
     st.session_state["email"] = ""
+    st.session_state["falta"] = ""
     st.session_state["Cart"] = CartController()
 
 with st.sidebar:
@@ -154,8 +154,11 @@ if "Login" in st.session_state:
             st.markdown("***")
 
             col1,col2 = st.columns(2,gap="large")
- 
-            for i in range(len(p_controller.get_products()) - 1):
+            
+            if st.session_state["falta"]:
+                st.warning(st.session_state["falta"])
+            
+            for i in range(0, len(p_controller.get_products()) - 1, 2):
                 with col1:
 
                     product = p_controller.get_product(index = i)
@@ -163,9 +166,9 @@ if "Login" in st.session_state:
                     c.markdown(f"## {product.get_name()}")
                     c.image(f"{product.get_url()}")
                     c.markdown(f"## R${product.get_price()}")
-                    quantity1 = c.number_input(label = "", key = random.randint(1000,1000000) * (i+1), format = "%i", step = 1,min_value = 1, max_value = product.get_amount())
-                    c.button(label = f"Adicionar {product.get_name()}", key = random.randint(1000,1000000) * (i+1), on_click= st.session_state["Cart"].add_product, args = (product, quantity1))
-                
+                    quantity1 = c.number_input(label = "", key = 100 * (i+1), format = "%i", step = 1,min_value = 1, max_value = product.get_amount())
+                    c.button(label = f"Adicionar {product.get_name()}", key = 200 * (i+12), on_click= st.session_state["Cart"].add_product, args = (product, quantity1))
+                    
                 with col2:
 
                     product = p_controller.get_product(index = i + 1)
@@ -173,8 +176,8 @@ if "Login" in st.session_state:
                     c.markdown(f"## {product.get_name()}")
                     c.image(f"{product.get_url()}")
                     c.markdown(f"## R${product.get_price()}")
-                    quantity2 = c.number_input(label = "",  format = "%i", key = random.randint(1000,1000000) * (i+1), step = 1,min_value = 1, max_value = product.get_amount())
-                    c.button(label = f"Adicionar {product.get_name()}", key = random.randint(1000,1000000) * (i+1), on_click= st.session_state["Cart"].add_product, args = (product, quantity2))
+                    quantity2 = c.number_input(label = "",  format = "%i", key = 300 * (i+83), step = 1,min_value = 1, max_value = product.get_amount())
+                    c.button(label = f"Adicionar {product.get_name()}", key = 400 * (i+99), on_click= st.session_state["Cart"].add_product, args = (product, quantity2))
                     
         with tab3:
 
