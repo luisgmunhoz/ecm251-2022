@@ -25,13 +25,10 @@ class UserController():
                 st.session_state['Email'] = email                    # Email
                 
             else:
-                st.session_state["Login"] = "negado"
-                st.markdown("# Usuário/Senha Incorreta 💩")
-        
+                st.session_state["Login"] = "errado"
         except KeyError:
 
-            st.session_state["Login"] = "negado"
-            st.markdown("# Usuário/Senha Incorreta")
+            st.session_state["Login"] = "errado"
             
 
     def sign_up(self, name, email, password, cpf):
@@ -61,3 +58,9 @@ class UserController():
 
     def go_back():
         st.session_state["Profile"] = "dados"
+    
+    def sign_up_screen():
+        st.session_state["Login"] = "registro"
+    
+    def login_screen():
+        st.session_state["Login"] = "negado"

@@ -9,3 +9,6 @@ class ProductController:
 
     def get_product(self,index):
         return self._products[index]
+    
+    def get_products(self):
+        return self._products

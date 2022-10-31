@@ -4,6 +4,67 @@
     color: #488286;
     border-radius:22px;
 }
+
+[type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
+    cursor: pointer;
+    border-radius: 15px;
+}
+
+.css-rxg2fl {
+    width: 548px;
+    position: relative;
+    display: flex;
+    flex: 1 1 0%;
+    flex-direction: column;
+    background-color: #77878B;
+    gap: 1rem;
+    border-radius: 3px;
+}
+
+.st-bs{
+    color: #B7D5D4;
+    background-color: #488286;
+}
+
+.st-br{
+    color: #B7D5D4;
+    background-color: #488286;
+}
+
+.st-bq{
+    color: #B7D5D4;
+    background-color: #488286;
+}
+
+.st-bp{
+    color: #B7D5D4;
+    background-color: #488286;
+}
+
+.css-1r8izn3:disabled {
+    cursor: allowed;
+    border-radius:0px;
+    color: #B7D5D4;
+    background-color: #488286;
+}
+
+.css-1r8izn3:enabled {
+    cursor: allowed;
+    border-radius:0px;
+    color: #B7D5D4;
+    background-color: #488286;
+}
+
+.st-bo{
+    color: #B7D5D4;
+    background-color: #488286;
+}
+
+.st-ej{
+    color: #B7D5D4;
+    background-color: #488286;
+}
+
 .st-ce{
     color: #B7D5D4;
     background-color: #488286;
@@ -17,8 +78,7 @@
     background-color: #488286;
 }
 .st-dg{
-    color: #B7D5D4;
-    background-color: #488286;
+    color: #B7D5D4;    
 }
 .st-dj{
     color: #B7D5D4;
@@ -60,10 +120,9 @@
 }
 
 .css-1r8izn3:last-of-type {
-    border-top-right-radius: 0.25rem;
-    border-bottom-right-radius: 0.25rem;
-    background-color: #B7D5D4;
-    color: #305252;
+    color: #B7D5D4;
+    background-color: #488286;
+    border-radius:0px;
 }
 
 

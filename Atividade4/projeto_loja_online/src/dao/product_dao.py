@@ -23,16 +23,16 @@ class ProductDAO:
         """)
         resultados = []
         for resultado in self.cursor.fetchall():
-            resultados.append(Product(name = resultado[1], price = resultado[2], url = resultado[3]))
+            resultados.append(Product(name = resultado[1], price = resultado[2], url = resultado[3], amount = resultado[4]))
         self.cursor.close()
         return resultados
 
     def inserir_product(self, product):
         self.cursor = self.conn.cursor()
         self.cursor.execute("""
-            INSERT INTO Products(name, price, url)
-            Values(?,?,?);
-        """, (product.get_name(), product.get_price(), product.get_url()))
+            INSERT INTO Products(name, price, url, amount)
+            Values(?,?,?,?);
+        """, (product.get_name(), product.get_price(), product.get_url()), product.get_amount())
         self.conn.commit()
         self.cursor.close()
 
@@ -45,7 +45,7 @@ class ProductDAO:
         product  = None
         resultado = self.cursor.fetchone()
         if resultado != None:
-            product = (Product(name = resultado[1], price = resultado[2], url = resultado[3]))
+            product = (Product(name = resultado[1], price = resultado[2], url = resultado[3], amount = resultado[4]))
         self.cursor.close()
         return product
 
@@ -54,9 +54,9 @@ class ProductDAO:
             self.cursor = self.conn.cursor()
             self.cursor.execute(f"""
                 UPDATE Products SET
-                name = '{product.name}',
-                password = {product.password}
-                WHERE email = '{product.email}'
+                price = '{product.get_price()}',
+                amount = {product.get_amount()}
+                WHERE name = '{product.get_name()}'
             """)
             self.conn.commit()
             self.cursor.close()
@@ -85,6 +85,6 @@ class ProductDAO:
         """)
         resultados = []
         for resultado in self.cursor.fetchall():
-            resultados.append(Product(name = resultado[1], price = resultado[2], url = resultado[3]))
+            resultados.append(Product(name = resultado[1], price = resultado[2], url = resultado[3], amount = resultado[4]))
         self.cursor.close()
         return resultados
