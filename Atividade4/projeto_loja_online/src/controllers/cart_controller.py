@@ -2,6 +2,7 @@
 
 import streamlit as st
 from src.models.cart import Cart
+from src.dao.product_dao import ProductDAO
 
 class CartController():
     def __init__(self):
@@ -27,3 +28,10 @@ class CartController():
         for items in self.get_cart().get_products():
             total += items[0].get_price() * items[1]
         return total
+    
+    def clear_cart(self):
+        for item in self.get_cart().get_products():
+            item[0].set_amount(item[0].get_amount() - item[1])
+            ProductDAO.get_instance().atualizar_product(item[0])
+            self.get_cart().get_products().pop(0)
+        return

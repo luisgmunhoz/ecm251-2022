@@ -54,7 +54,6 @@ class ProductDAO:
             self.cursor = self.conn.cursor()
             self.cursor.execute(f"""
                 UPDATE Products SET
-                price = '{product.get_price()}',
                 amount = {product.get_amount()}
                 WHERE name = '{product.get_name()}'
             """)

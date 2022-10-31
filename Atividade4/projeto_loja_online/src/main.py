@@ -166,9 +166,11 @@ if "Login" in st.session_state:
                     c.markdown(f"## {product.get_name()}")
                     c.image(f"{product.get_url()}")
                     c.markdown(f"## R${product.get_price()}")
-                    quantity1 = c.number_input(label = "", key = 100 * (i+1), format = "%i", step = 1,min_value = 1, max_value = product.get_amount())
-                    c.button(label = f"Adicionar {product.get_name()}", key = 200 * (i+12), on_click= st.session_state["Cart"].add_product, args = (product, quantity1))
-                    
+                    try:
+                        quantity1 = c.number_input(label = "", key = 100 * (i+1), format = "%i", step = 1,min_value = 1, max_value = product.get_amount())
+                        c.button(label = f"Adicionar {product.get_name()}", key = 200 * (i+12), on_click= st.session_state["Cart"].add_product, args = (product, quantity1))
+                    except:
+                        c.markdown(f"## {product.get_name()} em falta")
                 with col2:
 
                     product = p_controller.get_product(index = i + 1)
@@ -176,9 +178,12 @@ if "Login" in st.session_state:
                     c.markdown(f"## {product.get_name()}")
                     c.image(f"{product.get_url()}")
                     c.markdown(f"## R${product.get_price()}")
-                    quantity2 = c.number_input(label = "",  format = "%i", key = 300 * (i+83), step = 1,min_value = 1, max_value = product.get_amount())
-                    c.button(label = f"Adicionar {product.get_name()}", key = 400 * (i+99), on_click= st.session_state["Cart"].add_product, args = (product, quantity2))
-                    
+
+                    try:
+                        quantity2 = c.number_input(label = "",  format = "%i", key = 300 * (i+83), step = 1,min_value = 1, max_value = product.get_amount())
+                        c.button(label = f"Adicionar {product.get_name()}", key = 400 * (i+99), on_click= st.session_state["Cart"].add_product, args = (product, quantity2))
+                    except:
+                        c.markdown(f"## {product.get_name()} em falta")
         with tab3:
 
             st.title("Carrinho")
@@ -224,4 +229,4 @@ if "Login" in st.session_state:
             valor_total = st.session_state["Cart"].get_total_price()
             
             st.markdown(f"## Valor total: R${valor_total:.3f} ")
-            
+            st.button(label = "Finalizar Pedido", key = 998, on_click= st.session_state["Cart"].clear_cart())
