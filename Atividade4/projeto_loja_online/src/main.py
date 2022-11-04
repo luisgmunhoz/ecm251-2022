@@ -21,6 +21,7 @@ if "Login" not in st.session_state:
     st.session_state["email"] = ""
     st.session_state["falta"] = ""
     st.session_state["Cart"] = CartController()
+    st.session_state["carrinho"] = ""
 
 with st.sidebar:
 
@@ -279,3 +280,6 @@ if "Login" in st.session_state:
             with col2:
                 st.text("")
                 st.button(label= "Cadastrar produto", on_click= ProductController.sign_product, args = (ProductController(), name1, price1, url1, amount1))
+                
+                st.markdown("### " + st.session_state["carrinho"])
+            
