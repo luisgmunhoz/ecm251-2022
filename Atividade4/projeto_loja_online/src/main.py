@@ -174,7 +174,7 @@ if "Login" in st.session_state:
                     
                     try:
                         c.markdown(f"## R${product.get_price()}")
-                        quantity1 = c.number_input(label = "", key = 100 * (i+1), format = "%i", step = 1,min_value = 1, max_value = product.get_amount())
+                        quantity1 = c.number_input(label = "", key = 100 * (i+1), format = "%i", step = 1,min_value = 1, max_value = product.get_amount() - 1)
                         c.button(label = f"Adicionar {product.get_name()}", key = 200 * (i+12), on_click= st.session_state["Cart"].add_product, args = (product, quantity1))
                     except:
                         c.markdown(f"## {product.get_name()} em falta")
@@ -190,7 +190,7 @@ if "Login" in st.session_state:
                     
                     try:
                         c.markdown(f"## R${product.get_price()}")
-                        quantity2 = c.number_input(label = "",  format = "%i", key = 300 * (i+83), step = 1,min_value = 1, max_value = product.get_amount())
+                        quantity2 = c.number_input(label = "",  format = "%i", key = 300 * (i+83), step = 1,min_value = 1, max_value = product.get_amount() - 1)
                         c.button(label = f"Adicionar {product.get_name()}", key = 400 * (i+99), on_click= st.session_state["Cart"].add_product, args = (product, quantity2))
                     except:
                         c.markdown(f"## {product.get_name()} em falta")
