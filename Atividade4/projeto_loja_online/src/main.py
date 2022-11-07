@@ -269,15 +269,11 @@ if "Login" in st.session_state:
                     key = 193,
             )
 
-            col1, col2 = st.columns(2)
             
-            with col1:
-                st.text("")
-                st.button(label= "Voltar", on_click= UserController.home_screen)
 
-            with col2:
-                st.text("")
-                st.button(label= "Cadastrar produto", on_click= ProductController.sign_product, args = (ProductController(), name1, price1, url1, amount1))
-                
-                st.markdown("### " + st.session_state["carrinho"])
             
+            st.text("")
+            st.button(label= "Cadastrar produto", on_click= ProductController.sign_product, args = (ProductController(), name1, price1, url1, amount1))
+            
+            st.markdown("### " + st.session_state["carrinho"])
+        
