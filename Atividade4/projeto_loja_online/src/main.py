@@ -131,25 +131,25 @@ if "Login" in st.session_state:
                     st.markdown("***")
                     st.markdown(f"### CPF: {st.session_state['Cpf']}")
                     st.markdown("***")
-                    st.button("Mudar informações de login", on_click = UserController.change_login_data)
+                    st.button("Mudar informações de login", key = 7852084, on_click = UserController.change_login_data)
 
             if st.session_state["Profile"] == "change":
                 email = st.text_input(
                     label="Novo Email",
-                        key = 82,
+                        key = 82700,
                 )
 
                 password = st.text_input(
                     label="Nova Senha",
                         type = "password",
-                            key = 56,
+                            key = 56240,
                 )
                 col3, col4 = st.columns(2)
                 with col3:
-                    st.button(label = "Voltar", on_click = UserController.go_back)
+                    st.button(label = "Voltar", key = 99785, on_click = UserController.go_back)
                 
                 with col4:
-                    st.button(label= "Alterar", on_click= UserController.change_data, args = (UserController(), email, password))
+                    st.button(label= "Alterar", key = 1234675, on_click= UserController.change_data, args = (UserController(), email, password))
         with tab2:
 
             st.title("Home")
