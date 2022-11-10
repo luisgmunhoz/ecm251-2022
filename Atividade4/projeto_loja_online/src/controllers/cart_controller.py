@@ -34,7 +34,7 @@ class CartController():
             for item in self.get_cart().get_products():
                 if item[0].get_amount() - item[1] >= 0:
                     item[0].set_amount(item[0].get_amount() - item[1])
-                ProductDAO.get_instance().atualizar_product(item[0])
+                ProductDAO.get_instance().update_product(item[0])
             self.get_cart().set_products([])
             return True
         except:

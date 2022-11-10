@@ -18,7 +18,7 @@ class ProductController:
     def sign_product(self, name, price, url, amount):
         product = Product(name, price, url, amount)
         
-        teste = ProductDAO.get_instance().inserir_product(product)
+        teste = ProductDAO.get_instance().insert_product(product)
         if teste == False:
             st.session_state["carrinho"] = "Falha ao Cadastrar"
             print(teste)

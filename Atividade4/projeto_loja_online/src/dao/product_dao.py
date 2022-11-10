@@ -27,7 +27,7 @@ class ProductDAO:
         self.cursor.close()
         return resultados
 
-    def inserir_product(self, product):
+    def insert_product(self, product):
         try:
             self.cursor = self.conn.cursor()
             self.cursor.execute(f"""
@@ -45,20 +45,7 @@ class ProductDAO:
             return False
         return True
 
-    def pegar_product(self, email):
-        self.cursor = self.conn.cursor()
-        self.cursor.execute(f"""
-            SELECT * FROM Products
-            WHERE email = '{email}';
-        """)
-        product  = None
-        resultado = self.cursor.fetchone()
-        if resultado != None:
-            product = (Product(name = resultado[0], price = resultado[1], url = resultado[2], amount = resultado[3]))
-        self.cursor.close()
-        return product
-
-    def atualizar_product(self, product):
+    def update_product(self, product):
         try:
             self.cursor = self.conn.cursor()
             self.cursor.execute(f"""
@@ -71,28 +58,3 @@ class ProductDAO:
         except:
             return False
         return True
-    
-    def deletar_product(self, email):
-        try:
-            self.cursor = self.conn.cursor()
-            self.cursor.execute(f"""
-                DELETE FROM Products 
-                WHERE email = '{email}'
-            """)
-            self.conn.commit()
-            self.cursor.close()
-        except:
-            return False
-        return True
-    
-    def search_all_for_name(self, name):
-        self.cursor = self.conn.cursor()
-        self.cursor.execute(f"""
-            SELECT * FROM Products
-            WHERE name LIKE '{name}%';
-        """)
-        resultados = []
-        for resultado in self.cursor.fetchall():
-            resultados.append(Product(name = resultado[0], price = resultado[1], url = resultado[2], amount = resultado[3]))
-        self.cursor.close()
-        return resultados

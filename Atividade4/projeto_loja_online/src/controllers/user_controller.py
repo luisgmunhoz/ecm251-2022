@@ -37,7 +37,7 @@ class UserController():
         user = User(name, email, password, cpf)
        
         try:
-            UserDAO.get_instance().inserir_user(user)
+            UserDAO.get_instance().insert_user(user)
             st.markdown("### Registrado")
         except:
             st.markdown("### Email ou cpf já registrados")
@@ -49,7 +49,7 @@ class UserController():
     def change_data(self, email, password):
         user = User(st.session_state['Usuario'], email, password, st.session_state['Cpf'])
         try:
-            UserDAO.get_instance().atualizar_user(user)
+            UserDAO.get_instance().update_user(user)
             st.markdown("### Alterações Sucesso")
         except:
             st.markdown("### Email já registrado")
