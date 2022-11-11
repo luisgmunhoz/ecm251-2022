@@ -220,19 +220,23 @@ if "Login" in st.session_state:
 
                 c = st.container()
                 for i in range(len(product_names)):
-                    c.markdown(f"#### {product_names[i]}")
+                    c.markdown(f"### {product_names[i]}")
+
 
             with col2:
 
                 c = st.container()
                 for i in range(len(product_names)):
-                    c.markdown(f"#### R${product_prices[i]}")
+                    c.markdown(f"## R${product_prices[i]}")
+
 
             with col3:
                 
                 c = st.container()
+                
                 for i in range(len(product_names)):
-                    c.markdown(f"#### {product_qtt[i]}")
+                    c.markdown(f"## {product_qtt[i]}")
+
 
             st.markdown("***")
             valor_total = st.session_state["Cart"].get_total_price()
