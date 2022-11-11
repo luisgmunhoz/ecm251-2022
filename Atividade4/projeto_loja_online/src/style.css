@@ -125,6 +125,7 @@
     flex: 1 1 0%;
     width: 100%;
     padding: 6rem 1rem 10rem;
+    border-radius: 16px;
     max-width: 46rem;
     background-color: #77878B;
 }
@@ -172,6 +173,7 @@
     padding-right: 1rem;
 }
 .css-128j0gw {
+    border-radius:16px;
     padding-left: 0px;
     background-color: #77878B;
     padding-right: 0px;
