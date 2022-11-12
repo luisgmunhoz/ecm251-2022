@@ -1,3 +1,5 @@
+# Luis Guilherme de Souza Munhoz RA: 20.01937-8
+
 import sqlite3
 from src.models.product import Product
 
