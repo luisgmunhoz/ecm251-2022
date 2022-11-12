@@ -23,11 +23,11 @@ class ProductDAO:
         self.cursor.execute("""
             SELECT * FROM Products;
         """)
-        resultados = []
-        for resultado in self.cursor.fetchall():
-            resultados.append(Product(name = resultado[0], price = resultado[1], url = resultado[2], amount = resultado[3]))
+        results = []
+        for result in self.cursor.fetchall():
+            results.append(Product(name = result[0], price = result[1], url = result[2], amount = result[3]))
         self.cursor.close()
-        return resultados
+        return results
 
     def insert_product(self, product):
         try:

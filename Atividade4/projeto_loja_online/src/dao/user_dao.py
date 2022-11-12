@@ -23,11 +23,11 @@ class UserDAO:
         self.cursor.execute("""
             SELECT * FROM Users;
         """)
-        resultados = []
-        for resultado in self.cursor.fetchall():
-            resultados.append(User(name = resultado[1], email = resultado[2], password = resultado[3], cpf = resultado[4]))
+        results = []
+        for result in self.cursor.fetchall():
+            results.append(User(name = result[1], email = result[2], password = result[3], cpf = result[4]))
         self.cursor.close()
-        return resultados
+        return results
 
     def insert_user(self, user):
         self.cursor = self.conn.cursor()
